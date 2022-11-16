@@ -1,0 +1,101 @@
+.user .container .content .header {
+    max-width: 70%;
+    min-height: 150px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 30px auto;
+    box-shadow: 0 0 10px #424242;
+    border-radius: 10px;
+}
+.user .container .content .header .imgBg {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+}
+.user .container .content .header .imgBg .image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #fff;
+    overflow: hidden;
+}
+.user .container .content .header .infoUser {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.user .container .content .header .public {
+    display: flex;
+    gap: 20px;
+}
+.user .container .content .header .public div {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.user .container .content .userPost {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 70%;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #424242;
+    padding: 0 10px;
+}
+.user .container .content .userPost .userPublic {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+.user .container .content .userPost .userPublic .divHead {
+    padding: 5px;
+    position: relative;
+}
+.user .container .content .userPost .userPublic .divHead button {
+    width: 15px;
+    height: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 5px;
+    top: -10px;
+    cursor: pointer;
+    color: red;
+    background: none;
+    border: none;
+    display: none;
+}
+.user .container .content .userPost .userPublic .divHead:hover button {
+    display: flex;
+}
+@media (max-width: 760px) {
+    .user .container .content .userPost .userPublic {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+}
+@media (max-width: 720px) {
+    .user .container .content .header{
+        display: flex;
+        flex-direction: column;
+    }
+}
+@media (max-width: 530px) {
+    .user .container .content .header .public {
+        display: flex;
+        flex-direction: column;
+    }
+    .user .container .content .userPost .userPublic {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+    }
+}
