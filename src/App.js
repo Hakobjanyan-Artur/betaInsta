@@ -6,7 +6,7 @@ import Messenger from './Componenrts/Messenger/Messenger';
 import Posts from './Componenrts/Posts/Posts';
 import User from './Componenrts/User/User';
 import Authorization from './Componenrts/Authorization/Authorization';
-
+import Error from './pages/Error';
 function App() {
   return (
     <div className="App">
@@ -18,6 +18,7 @@ function App() {
               <Route path='posts' element={< Posts />} />
               <Route path='user' element={< User />} />
             </Route>
+            <Route path='*' element={<Error />} />
         </Routes>
     </div>
   );

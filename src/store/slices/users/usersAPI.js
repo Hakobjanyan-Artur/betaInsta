@@ -5,11 +5,9 @@ export const fetchUsers = createAsyncThunk(
     
     'users/fetchUsers',
     async function () {
-        
         const responseUsers = await axios.get('https://jsonplaceholder.typicode.com/users')
         const responsePosts = await axios.get('https://jsonplaceholder.typicode.com/photos?_limit=100')
         const postsData= responsePosts.data
-
         const data = responseUsers.data.map(user => ({
             id: user.id,
             email: user.email.toLowerCase(),
@@ -17,6 +15,7 @@ export const fetchUsers = createAsyncThunk(
             username: user.username.toLowerCase(),
             about: user.company.catchPhrase,
             name: user.name,
+            messages: [],
             posts: postsData.filter(post => post.albumId === user.id)
                             .map(post => ({
                                         id: post.id + 'User',

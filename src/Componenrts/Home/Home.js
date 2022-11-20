@@ -15,9 +15,7 @@ const Home = () => {
     const search = useSelector(selectSearch)
     const posts = useSelector(selectPosts)
     const dispatch = useDispatch()
-
     const filterPosts = useMemo(() => {
-
         if (!search.replaceAll(' ', '')) {
             
             return [...posts]
@@ -34,7 +32,7 @@ const Home = () => {
     useEffect(() => {
 
         if (!currentUser) {
-
+            
             navigate('/')
         
         }

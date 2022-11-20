@@ -4,11 +4,11 @@ import './PostItem.css'
 import { AiOutlineHeart } from "react-icons/ai";
 import { FaRegComment } from "react-icons/fa";
 import { FiSend } from "react-icons/fi";
-import {  useRef } from 'react';
+import {  useRef, useState } from 'react';
 import { selectUsers } from '../../store/slices/users/usersSlice';
 
 const PostItem = ({username, id, img, desc, comments}) => {
-    
+    const [more, setMore] = useState(false)
     const dispatch = useDispatch()
     const {currentUser} = useSelector(selectUsers)
     const formRef = useRef(null)
@@ -40,9 +40,16 @@ const PostItem = ({username, id, img, desc, comments}) => {
                             </div>
                         </div>
                             {desc && <div className='desc'>{desc}</div>}
-                            <div className="comments">
+                            <div className="comments"
+                            style={{
+                                height: more ? '' : '100px',
+                                minHeight: more ? '50px' : ''
+                            }}
+                            >
+                            <div className='more' onClick={() => setMore(true)}>More...</div>
                                 {comments.map(comment => (
-                                    <div className="commentari" key={comment.id}>
+                                    <div className="commentari"
+                                    key={comment.id}>
                                         
                                         <div className="comUserName">
                                             <h2>{comment.username}</h2>
@@ -51,6 +58,7 @@ const PostItem = ({username, id, img, desc, comments}) => {
                                             <p>{comment.body}</p>
                                         </div>
                                     </div>
+                                    
                                 ))}
                             </div>
                         <div className="newComments">

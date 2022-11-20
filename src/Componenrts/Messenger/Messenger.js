@@ -1,22 +1,31 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { addMessage, addMessageInsta, instaBotMess, selectMessege } from '../../store/slices/messege/messegeSlice'
-import { selectUsers } from '../../store/slices/users/usersSlice'
+import { botMess, selectUsers, sendMess } from '../../store/slices/users/usersSlice'
 import './Messenger.css'
 import useSound from 'use-sound';
 import sendSfx from '../../sound/send_iphone.mp3'
+import music from '../../sound/Harut Pambukchyan - Te Achers Qez Voronen (2017).mp3'
+
+
+
 
 function Messenger() {
-
+    
     const {currentUser} = useSelector(selectUsers)
     const navigate = useNavigate()
     const desctopRef = useRef(null)
     const formRef = useRef(null)
     const dispatch = useDispatch()
-    const {message} = useSelector(selectMessege)
-    const [play] = useSound(sendSfx)
-
+    const [playFx] = useSound(sendSfx)
+    const [playM, {stop}] = useSound(music)
+    let idx = currentUser?.messages.length - 1
+    
+    if (currentUser?.messages[idx]?.mess === 'ok') {
+        playM()
+    }else if(currentUser?.messages[idx]?.mess === 'of course') {
+        stop()
+    }
     useEffect(() => {
         if (!currentUser) {
             navigate('/')
@@ -30,17 +39,11 @@ function Messenger() {
     const handleSubmit = (e) => {
         e.preventDefault()
         if (formRef.current[0].value) {
-            dispatch(addMessage({mess: formRef.current[0].value, user: currentUser.username}))
-
-            play()
-
-            dispatch(instaBotMess({mess: formRef.current[0].value.split(' ').join('').toLowerCase(), user: currentUser.username}))
             
-            setTimeout(() => {
-                dispatch(addMessageInsta(currentUser.username))
-                play()
-            },1500)
+            dispatch(botMess({mess: formRef.current[0].value.replaceAll(' ', ''), user: currentUser.username}))
 
+            playFx()
+            dispatch(sendMess({mess: formRef.current[0].value}))
         }
         
         formRef.current.reset()
@@ -56,7 +59,7 @@ function Messenger() {
                                     <img src="https://phonoteka.org/uploads/posts/2021-07/1625611256_28-phonoteka-org-p-ilon-mask-art-krasivo-30.jpg" alt="" />
                                 </div>
                                 <div className='name'>
-                                        <h2>{currentUser?.username}</h2>
+                                        <h2>{currentUser.username}</h2>
                                 </div>
                         </div>
                         <div className="usertwo">
@@ -64,19 +67,19 @@ function Messenger() {
                                         <h2>InstaBot</h2>
                                 </div>
                                 <div className="image">
-                                    <img src="https://banner2.cleanpng.com/20180325/pcw/kisspng-computer-icons-user-profile-avatar-avatar-5ab751f86d73d2.5490619515219635124483.jpg" alt="" />
+                                    <img src="https://i.pinimg.com/originals/80/25/a9/8025a9f63435b64305b1cf045c76fd70.jpg" alt="" />
                                 </div>
                         </div>
                     </div>
                     <div ref={desctopRef} className="desctop">
                             {
-                                message.map(mess => (
+                                currentUser?.messages.map(mess => (
                                     <div key={mess.id}>
                                     <div className='messDesc'
                                     style={{
-                                        marginLeft: mess.user === 'Instabot' ? '45%' : '0'
+                                        marginLeft: mess.user === 'instabot' ? '45%' : '0'
                                     }} 
-                                    > {mess.mess}</div>
+                                    >{mess.mess}</div>
                                     </div>
                                 ))
                             }

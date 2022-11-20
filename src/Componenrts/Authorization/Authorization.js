@@ -46,11 +46,9 @@ function Authorization() {
                     <form ref={formRef} onSubmit={handleSubmit}>
                        <div className="logo"><InstaLogo/></div>
                         <input type="text"
-                            defaultValue='bret' 
                             placeholder='Login or Email'
                         />
                         <input type="password"
-                            defaultValue='gwenborough' 
                             placeholder='Password'
                         />
                         <button>Sign in</button>

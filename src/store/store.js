@@ -1,5 +1,4 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { messegeReducer } from "./slices/messege/messegeSlice";
 import { postsReducer } from "./slices/posts/postsSlice";
 import { searchReducer } from "./slices/search/searchSlice";
 import { usersReducer } from "./slices/users/usersSlice";
@@ -24,7 +23,6 @@ import {
         posts: postsReducer,
         search: searchReducer,
         users: usersReducer,
-        messege: messegeReducer
   })
   const persistedReducer = persistReducer(persistConfig, rootReducer)
 

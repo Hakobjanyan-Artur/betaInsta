@@ -10,9 +10,10 @@ function User() {
     const {currentUser} = useSelector(selectUsers)
     const navigate = useNavigate()
     const dispatch = useDispatch()
-
+    
     useEffect(() => {
         if (!currentUser) {
+            
             navigate('/')
         }
     },[])
@@ -43,7 +44,7 @@ function User() {
                         <h2>Publications</h2>
                     </div>
                     <div className="userPublic">
-                        {currentUser?.posts.map(post => (
+                        {currentUser.posts.map(post => (
                             <div className="divHead" key={post.id}>
                                 <button onClick={() => {dispatch(delUserPost(post.id)); dispatch(delPost(post.id))}}>X</button>
                                 <div className="div">
